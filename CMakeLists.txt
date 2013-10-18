@@ -229,6 +229,7 @@ ENDIF(WITH_DOCUMENTATION)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=gnu++0x -D_GNU_SOURCE -pedantic -Wno-variadic-macros -Wno-long-long")
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=c++98 -D_GNU_SOURCE")
 
+set (CMAKE_DL_LIBS "${CMAKE_DL_LIBS} -lrt")
 
 if(WITH_PLUGIN_COMMAND)
     if(WITH_DBUS_WRAPPER)
