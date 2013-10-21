@@ -44,7 +44,7 @@ mv $RPM_BUILD_ROOT%{_includedir}/*.h $RPM_BUILD_ROOT%{_includedir}/command $RPM_
 rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync.so*
 
 %files
-%doc LICENCE README CHANGELOG
+%doc LICENCE README.html
 %{_bindir}/AudioManager
 %{_libdir}/audioManager/command/libPluginCommandInterfaceDbus.so*
 %{_libdir}/audioManager/routing/libPluginRoutingInterfaceDbus.so*
