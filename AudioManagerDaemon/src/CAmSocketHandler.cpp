@@ -31,6 +31,8 @@
 #include <csignal>
 #include "shared/CAmDltWrapper.h"
 
+#include <unistd.h>
+
 namespace am
 {
 
