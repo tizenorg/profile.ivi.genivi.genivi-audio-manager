@@ -28,6 +28,7 @@
 #include <iostream>
 #include <unordered_map>
 #include "IAmDatabaseHandler.h"
+#include <cassert>
 
 namespace am
 {

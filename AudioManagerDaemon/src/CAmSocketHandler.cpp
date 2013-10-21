@@ -32,6 +32,8 @@
 #include <unistd.h>
 #include "shared/CAmDltWrapper.h"
 
+#include <unistd.h>
+
 namespace am
 {
 
