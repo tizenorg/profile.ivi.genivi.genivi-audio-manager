@@ -326,7 +326,8 @@ void mainProgram()
     CAmControlReceiver iControlReceiver(&iDatabaseHandler,&iRoutingSender,&iCommandSender,&iSocketHandler, &iRouter, &iNodeStateCommunicator);
     iNodeStateCommunicator.registerControlSender(&iControlSender);
 #else /*WITH_NSM*/
-    CAmControlReceiver iControlReceiver(&iDatabaseHandler,&iRoutingSender,&iCommandSender,&iSocketHandler, &iRouter);
+    // CAmControlReceiver iControlReceiver(&iDatabaseHandler,&iRoutingSender,&iCommandSender,&iSocketHandler, &iRouter);
+    CAmControlReceiver iControlReceiver(&iDatabaseHandler, &iRoutingSender, &iCommandSender, &iSocketHandler, &iRouter, &iDBusWrapper);
 #endif /*WITH_NSM*/
 #else /*WITH_DBUS_WRAPPER*/
     CAmCommandReceiver iCommandReceiver(&iDatabaseHandler,&iControlSender,&iSocketHandler);

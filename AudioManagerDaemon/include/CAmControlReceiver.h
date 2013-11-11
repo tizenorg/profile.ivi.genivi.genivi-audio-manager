@@ -33,6 +33,7 @@ class CAmRoutingSender;
 class CAmCommandSender;
 class CAmRouter;
 class CAmNodeStateCommunicator;
+class CAmDbusWrapper;
 
 /**
  * This class is used to receive all commands from the control interface
@@ -42,6 +43,7 @@ class CAmControlReceiver: public IAmControlReceive
 public:
     CAmControlReceiver(CAmDatabaseHandler *iDatabaseHandler, CAmRoutingSender *iRoutingSender, CAmCommandSender *iCommandSender, CAmSocketHandler *iSocketHandler, CAmRouter* iRouter, CAmNodeStateCommunicator* iNodeStateCommunicator);
     CAmControlReceiver(CAmDatabaseHandler *iDatabaseHandler, CAmRoutingSender *iRoutingSender, CAmCommandSender *iCommandSender, CAmSocketHandler *iSocketHandler, CAmRouter* iRouter);
+    CAmControlReceiver(CAmDatabaseHandler *iDatabaseHandler, CAmRoutingSender *iRoutingSender, CAmCommandSender *iCommandSender, CAmSocketHandler *iSocketHandler, CAmRouter* iRouter, CAmDbusWrapper *iDBusWrapper);
     ~CAmControlReceiver();
     am_Error_e getRoute(const bool onlyfree, const am_sourceID_t sourceID, const am_sinkID_t sinkID, std::vector<am_Route_s>& returnList);
     am_Error_e connect(am_Handle_s& handle, am_connectionID_t& connectionID, const am_ConnectionFormat_e format, const am_sourceID_t sourceID, const am_sinkID_t sinkID);
@@ -136,12 +138,15 @@ public:
     am_Error_e getInterfaceVersionNSM(uint32_t& version) ;
     NsmErrorStatus_e sendLifecycleRequestCompleteNSM(const uint32_t RequestId, const NsmErrorStatus_e status) ;
 
+    am_Error_e getDBusConnectionWrapper(CAmDbusWrapper*& dbusConnectionWrapper) const;
+
 private:
     CAmDatabaseHandler* mDatabaseHandler; //!< pointer tto the databasehandler
     CAmRoutingSender* mRoutingSender; //!< pointer to the routing send interface.
     CAmCommandSender* mCommandSender; //!< pointer to the command send interface
     CAmSocketHandler* mSocketHandler; //!< pointer to the socketHandler
     CAmRouter* mRouter; //!< pointer to the Router
+    CAmDbusWrapper* mDBusWrapper;
     CAmNodeStateCommunicator* mNodeStateCommunicator;
 };
 

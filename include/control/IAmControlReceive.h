@@ -26,6 +26,7 @@
 #include <string>
 #include "audiomanagertypes.h"
 namespace am {
+class CAmDbusWrapper;
 class CAmSocketHandler;
 }
 
@@ -837,6 +838,15 @@ namespace am {
 		 * NsmErrorStatus_Error: An error occured while processing the "LifecycleRequest".
 		 */
 		virtual NsmErrorStatus_e sendLifecycleRequestCompleteNSM(const uint32_t RequestId, const NsmErrorStatus_e status) =0;
+
+		/**
+		 * this function is used to retrieve a pointer to the dBusConnectionWrapper
+		 * @return E_OK if pointer is valid, E_UKNOWN if AudioManager was compiled without DBus Support
+		 * 
+		 * @param dbusConnectionWrapper    This is a wrapper class that is needed to keep dbus inclusions away from the interface.
+		 * The DBusWrapperClass will return the pointer to the DbusConnection call (getDBusConnection)
+		 */
+		virtual am_Error_e getDBusConnectionWrapper(CAmDbusWrapper*& dbusConnectionWrapper) const =0;
 
 	};
 }

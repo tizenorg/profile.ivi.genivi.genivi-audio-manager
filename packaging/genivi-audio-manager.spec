@@ -33,7 +33,7 @@ Requires:   %{name} = %{version}-%{release}
 mkdir build
 cd build
 
-cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DWITH_DBUS_WRAPPER=ON -DWITH_NSM=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
 #make VERBOSE=1
 make %{?_smp_mflags} 
 
@@ -51,6 +51,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync
 %{_libdir}/audioManager/command/libPluginCommandInterfaceDbus.so*
 %{_libdir}/audioManager/routing/libPluginRoutingInterfaceDbus.so*
 %{_libdir}/audioManager/control/libPluginControlInterface.so*
+%{_libdir}/audioManager/control/libPluginControlInterfaceDbus.so*
 %{_datadir}/audiomanager/*xml
 
 %files devel

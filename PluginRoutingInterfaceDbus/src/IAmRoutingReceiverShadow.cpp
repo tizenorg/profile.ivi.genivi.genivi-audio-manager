@@ -645,6 +645,7 @@ void IAmRoutingReceiverShadowDbus::setRoutingReceiver(IAmRoutingReceive*& receiv
     DBusConnection* connection;
     mRoutingReceiveInterface->getDBusConnectionWrapper(mDBusWrapper);
     assert(mDBusWrapper != NULL);
+
     mDBusWrapper->getDBusConnection(connection);
     assert(connection != NULL);
     mDBUSMessageHandler.setDBusConnection(connection);
