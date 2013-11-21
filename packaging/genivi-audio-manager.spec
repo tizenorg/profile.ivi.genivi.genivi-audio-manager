@@ -11,6 +11,7 @@ BuildRequires:	  pkgconfig(python)
 BuildRequires:	  pkgconfig(sqlite3)
 BuildRequires:	  pkgconfig(dbus-1)
 BuildRequires:	  pkgconfig(automotive-dlt)
+BuildRequires:	  pkgconfig(zlib)
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
