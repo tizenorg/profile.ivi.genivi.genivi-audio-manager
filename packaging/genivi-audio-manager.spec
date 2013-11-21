@@ -10,6 +10,7 @@ BuildRequires:	  pkgconfig(libsystemd-journal)
 BuildRequires:	  pkgconfig(python)
 BuildRequires:	  pkgconfig(sqlite3)
 BuildRequires:	  pkgconfig(dbus-1)
+BuildRequires:	  pkgconfig(automotive-dlt)
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -31,7 +32,7 @@ Requires:   %{name} = %{version}-%{release}
 mkdir build
 cd build
 
-cmake -DWITH_DLT=OFF -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
 #make VERBOSE=1
 make %{?_smp_mflags} 
 
