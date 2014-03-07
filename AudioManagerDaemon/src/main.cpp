@@ -64,6 +64,14 @@
 #include "shared/CAmSocketHandler.h"
 
 
+#ifdef COLORIZE_LOGS
+#    define SOURCE "\e[0;34m"
+#    define NORMAL "\e[0;30m"
+#else
+#    define SOURCE ""
+#    define NORMAL ""
+#endif
+
 
 using namespace am;
 DLT_DECLARE_CONTEXT(AudioManager)
@@ -174,15 +182,15 @@ void parseCommandLine(int argc, char **argv)
     {
 #ifdef WITH_DLT
     #ifdef WITH_DBUS_WRAPPER
-            int option = getopt(argc, argv, "h::v::c::l::r::L::R::d::t::m::i::p::T::");
+            int option = getopt(argc, argv, "hvc:l:r:L:R:d:t:m:ip:T:");
     #else
-            int option = getopt(argc, argv, "h::v::c::l::r::L::R::d::t::m::i::p::");
+            int option = getopt(argc, argv, "hvc:l:r:L:R:d:t:m:ip:");
     #endif //WITH_DBUS_WRAPPER
 #else
     #ifdef WITH_DBUS_WRAPPER
-            int option = getopt(argc, argv, "h::v::V::c::l::r::L::R::d::t::m::i::p::T::");
+            int option = getopt(argc, argv, "hvVc:l:r:L:R:d:t:m:ip:T:");
     #else
-            int option = getopt(argc, argv, "h::v::V::c::l::r::L::R::d::t::m::i::p::");
+            int option = getopt(argc, argv, "hvVc:l:r:L:R:d:t:m:ip:");
     #endif //WITH_DBUS_WRAPPER
 #endif
 
@@ -239,7 +247,7 @@ void parseCommandLine(int argc, char **argv)
             break;
 #ifndef WITH_DLT
             case 'V':
-            printf("\e[0;34m[DLT]\e[0;30m\tDebug output to stdout enabled\n");
+            printf(SOURCE "[DLT]" NORMAL "\tDebug output to stdout enabled\n");
             enableNoDLTDebug = true;
             break;
 #endif

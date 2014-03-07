@@ -78,6 +78,13 @@ OPTION ( GLIB_DBUS_TYPES_TOLERANT
 
 OPTION ( WITH_NSM
     "build with NSM support" ON)
+
+OPTION ( COLORIZE_LOGS
+    "colorize logs if we log to stdout" OFF)
+
+IF (COLORIZE_LOGS)
+    SET (COLORIZE_FLAGS -DCOLORIZE_LOGS)
+ENDIF (COLORIZE_LOGS)
     
 IF (NOT WITH_DBUS_WRAPPER)
     SET (WITH_NSM OFF)
@@ -177,7 +184,7 @@ IF(WITH_DOCUMENTATION)
 ENDIF(WITH_DOCUMENTATION)
 
 ##global build flags set(CPACK_RPM_COMPONENT_INSTALL ON)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=gnu++0x -D_GNU_SOURCE -pedantic -Wno-variadic-macros -Wno-long-long")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=gnu++0x -D_GNU_SOURCE -pedantic -Wno-variadic-macros -Wno-long-long ${COLORIZE_FLAGS}")
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -std=c++98 -D_GNU_SOURCE")
 
 set (CMAKE_DL_LIBS "${CMAKE_DL_LIBS} -lrt")
@@ -194,6 +201,7 @@ endif(WITH_PLUGIN_ROUTING)
 if(WITH_PLUGIN_CONTROL)
 	add_subdirectory (PluginControlInterface)
 	add_subdirectory (PluginControlInterfaceDbus)
+        add_subdirectory (PluginControlInterfaceMurphy)
 endif(WITH_PLUGIN_CONTROL)
 
 add_subdirectory (AudioManagerDaemon)

@@ -26,6 +26,14 @@
 #include <iostream>
 #include <string.h>
 
+#ifdef COLORIZE_LOGS
+#    define SOURCE "\e[0;34m"
+#    define NORMAL "\e[0;30m"
+#else
+#    define SOURCE ""
+#    define NORMAL ""
+#endif
+
 namespace am
 {
 
@@ -68,7 +76,7 @@ CAmDltWrapper::CAmDltWrapper(const bool enableNoDLTDebug) :
 {
     (void) enableNoDLTDebug;
 #ifndef WITH_DLT
-    std::cout << "\e[0;34m[DLT]\e[0;30m\tRunning without DLT-support" << std::endl;
+    std::cout << SOURCE "[DLT]" NORMAL "\tRunning without DLT-support" << std::endl;
 #endif
 }
 
@@ -103,7 +111,7 @@ void CAmDltWrapper::registerContext(DltContext& handle, const char *contextid, c
         }
     }
 
-    std::cout << "\e[0;34m[DLT]\e[0;30m\tRegistering Context " << contextid << " , " << description << std::endl;
+    std::cout << SOURCE "[DLT]" NORMAL "\tRegistering Context " << contextid << " , " << description << std::endl;
 
 #endif
 }
@@ -118,7 +126,7 @@ void CAmDltWrapper::init(DltLogLevelType loglevel, DltContext* context)
     dlt_user_log_write_start(context, &mDltContextData, loglevel);
 #else
     if(mEnableNoDLTDebug)
-        std::cout << "\e[0;34m[" << context->contextID << "]\e[0;30m\t";
+        std::cout << SOURCE "[" << context->contextID << "]" NORMAL "\t";
 #endif
 
 }
