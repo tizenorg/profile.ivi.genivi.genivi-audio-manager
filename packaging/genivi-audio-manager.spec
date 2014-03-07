@@ -12,6 +12,7 @@ BuildRequires:    pkgconfig(sqlite3)
 BuildRequires:    pkgconfig(dbus-1)
 BuildRequires:    pkgconfig(automotive-dlt)
 BuildRequires:    pkgconfig(zlib)
+BuildRequires:	  pkgconfig(murphy-common)
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -52,6 +53,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync
 %{_libdir}/audioManager/routing/libPluginRoutingInterfaceDbus.so*
 %{_libdir}/audioManager/control/libPluginControlInterface.so*
 %{_libdir}/audioManager/control/libPluginControlInterfaceDbus.so*
+%{_libdir}/audioManager/control/libPluginControlInterfaceMurphy.so*
 %{_datadir}/audiomanager/*xml
 
 %files devel
