@@ -34,7 +34,7 @@ Requires:   %{name} = %{version}-%{release}
 mkdir -p build
 cd build
 
-cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DWITH_DBUS_WRAPPER=ON -DWITH_NSM=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DWITH_DBUS_WRAPPER=ON -DWITH_NSM=OFF -DWITH_DLT=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
 #make VERBOSE=1
 %__make %{?_smp_mflags}
 
