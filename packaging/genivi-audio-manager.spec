@@ -13,6 +13,10 @@ BuildRequires:    pkgconfig(dbus-1)
 BuildRequires:    pkgconfig(automotive-dlt)
 BuildRequires:    pkgconfig(zlib)
 BuildRequires:	  pkgconfig(murphy-common)
+BuildRequires:    pkgconfig(murphy-domain-controller)
+BuildRequires:    pkgconfig(murphy-dbus-libdbus)
+BuildRequires:	  bison
+BuildRequires:	  flex
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -49,6 +53,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync
 %files
 %doc LICENCE README.html
 %{_bindir}/AudioManager
+%{_bindir}/domain-manager
 %{_libdir}/audioManager/command/libPluginCommandInterfaceDbus.so*
 %{_libdir}/audioManager/routing/libPluginRoutingInterfaceDbus.so*
 %{_libdir}/audioManager/control/libPluginControlInterface.so*

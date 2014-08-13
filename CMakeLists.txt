@@ -82,6 +82,9 @@ OPTION ( WITH_NSM
 OPTION ( COLORIZE_LOGS
     "colorize logs if we log to stdout" OFF)
 
+OPTION( WITH_DOMAIN_MANAGER
+	"Enable domain manager support" ON )
+
 IF (COLORIZE_LOGS)
     SET (COLORIZE_FLAGS -DCOLORIZE_LOGS)
 ENDIF (COLORIZE_LOGS)
@@ -209,6 +212,10 @@ add_subdirectory (AudioManagerDaemon)
 IF(EXISTS "${CMAKE_SOURCE_DIR}/ProjectSpecific/")
     add_subdirectory (ProjectSpecific)
 endif(EXISTS "${CMAKE_SOURCE_DIR}/ProjectSpecific/")
+
+if(WITH_DOMAIN_MANAGER)
+	add_subdirectory (domain-manager)
+endif(WITH_DOMAIN_MANAGER)
 
 # uninstall target
 configure_file(
