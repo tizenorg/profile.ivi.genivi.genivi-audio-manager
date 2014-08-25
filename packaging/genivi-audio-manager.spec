@@ -3,15 +3,15 @@ License:          MPL-2.0
 Group:            Automotive/API
 Summary:          GENIVI Audio Manager
 Version:          3.2
-Release:          1
+Release:          0
 Source:           %{name}-%{version}.tar.bz2
 BuildRequires:    cmake
-BuildRequires:	  pkgconfig(libsystemd-journal)
-BuildRequires:	  pkgconfig(python)
-BuildRequires:	  pkgconfig(sqlite3)
-BuildRequires:	  pkgconfig(dbus-1)
-BuildRequires:	  pkgconfig(automotive-dlt)
-BuildRequires:	  pkgconfig(zlib)
+BuildRequires:    pkgconfig(libsystemd-journal)
+BuildRequires:    pkgconfig(python)
+BuildRequires:    pkgconfig(sqlite3)
+BuildRequires:    pkgconfig(dbus-1)
+BuildRequires:    pkgconfig(automotive-dlt)
+BuildRequires:    pkgconfig(zlib)
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -30,17 +30,17 @@ Requires:   %{name} = %{version}-%{release}
 %setup -q -n %{name}-%{version}
 
 %build
-mkdir build
+mkdir -p build
 cd build
 
 cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DWITH_DBUS_WRAPPER=ON -DWITH_NSM=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
 #make VERBOSE=1
-make %{?_smp_mflags} 
+%__make %{?_smp_mflags} 
 
 %install
 rm -rf "$RPM_BUILD_ROOT"
 cd build
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install DESTDIR=$RPM_BUILD_ROOT
 mkdir $RPM_BUILD_ROOT%{_includedir}/%{name}
 mv $RPM_BUILD_ROOT%{_includedir}/*.h $RPM_BUILD_ROOT%{_includedir}/command $RPM_BUILD_ROOT%{_includedir}/control $RPM_BUILD_ROOT%{_includedir}/routing $RPM_BUILD_ROOT%{_includedir}/shared $RPM_BUILD_ROOT%{_includedir}/%{name}
 rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync.so*
