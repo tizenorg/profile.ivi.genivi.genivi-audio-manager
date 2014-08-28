@@ -1,2 +1,6 @@
+* Thu Aug 28 2014 Jaska Uimonen <jaska.uimonen@intel.com>
+- initial release of Murphy control plugin
+- domain manager for handling routing over dbus
+
 * Fri Feb 14 2014 Jaska Uimonen <jaska.uimonen@intel.com>
 - initial release of control dbus plugin
