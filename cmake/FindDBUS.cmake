@@ -21,8 +21,8 @@ FIND_PATH(DBUS_INCLUDE_DIR dbus/dbus.h
           PATHS "/usr/include/dbus-1.0")
 
 FIND_PATH(DBUS_ARCH_INCLUDE_DIR dbus/dbus-arch-deps.h
-PATHS "/usr/lib/dbus-1.0/include" 
-      "/usr/lib/*/dbus-1.0/include"
+/usr/lib${LIB_SUFFIX}/dbus-1.0/include
+/usr/lib${LIB_SUFFIX}/*/dbus-1.0/include
 )
 
 FIND_LIBRARY(DBUS_LIBRARY
