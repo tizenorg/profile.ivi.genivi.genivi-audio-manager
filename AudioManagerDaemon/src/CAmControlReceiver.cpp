@@ -44,6 +44,7 @@ CAmControlReceiver::CAmControlReceiver(IAmDatabaseHandler *iDatabaseHandler, CAm
         mCommandSender(iCommandSender), //
         mSocketHandler(iSocketHandler), //
         mRouter(iRouter), //
+        mDBusWrapper(NULL),
         mNodeStateCommunicator(iNodeStateCommunicator)
 {
     assert(mDatabaseHandler!=NULL);
@@ -60,6 +61,7 @@ CAmControlReceiver::CAmControlReceiver(IAmDatabaseHandler *iDatabaseHandler, CAm
         mCommandSender(iCommandSender), //
         mSocketHandler(iSocketHandler), //
         mRouter(iRouter), //
+        mDBusWrapper(NULL),
         mNodeStateCommunicator(NULL)
 {
     assert(mDatabaseHandler!=NULL);
@@ -67,6 +69,23 @@ CAmControlReceiver::CAmControlReceiver(IAmDatabaseHandler *iDatabaseHandler, CAm
     assert(mCommandSender!=NULL);
     assert(mSocketHandler!=NULL);
     assert(mRouter!=NULL);
+}
+
+CAmControlReceiver::CAmControlReceiver(IAmDatabaseHandler *iDatabaseHandler, CAmRoutingSender *iRoutingSender, CAmCommandSender *iCommandSender, CAmSocketHandler *iSocketHandler, CAmRouter* iRouter, CAmDbusWrapper *iDBusWrapper) :
+        mDatabaseHandler(iDatabaseHandler), //
+        mRoutingSender(iRoutingSender), //
+        mCommandSender(iCommandSender), //
+        mSocketHandler(iSocketHandler), //
+        mRouter(iRouter), //
+        mDBusWrapper(iDBusWrapper),
+        mNodeStateCommunicator(NULL)
+{
+    assert(mDatabaseHandler!=NULL);
+    assert(mRoutingSender!=NULL);
+    assert(mCommandSender!=NULL);
+    assert(mSocketHandler!=NULL);
+    assert(mRouter!=NULL);
+    assert(mDBusWrapper!=NULL);
 }
 
 CAmControlReceiver::~CAmControlReceiver()
@@ -663,5 +682,14 @@ NsmErrorStatus_e CAmControlReceiver::sendLifecycleRequestCompleteNSM(const uint3
 
 }
 
+am_Error_e CAmControlReceiver::getDBusConnectionWrapper(CAmDbusWrapper *& dbusConnectionWrapper) const
+{
+#ifdef WITH_DBUS_WRAPPER
+    dbusConnectionWrapper = mDBusWrapper;
+    return (E_OK);
+#else
+    return (E_UNKNOWN);
+#endif
 }
 
+}
