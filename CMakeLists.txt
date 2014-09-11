@@ -102,6 +102,9 @@ IF (COLORIZE_LOGS)
     SET (COLORIZE_FLAGS -DCOLORIZE_LOGS)
 ENDIF (COLORIZE_LOGS)
 
+OPTION( WITH_DOMAIN_MANAGER
+	"Enable domain manager support" ON )
+
 SET (WITH_COMMON_API_GEN ON CACHE INTERNAL "hide this!" FORCE)
  
 IF (WITH_ENABLED_IPC STREQUAL "DBUS")
@@ -267,6 +270,10 @@ add_subdirectory (AudioManagerDaemon)
 IF(EXISTS "${CMAKE_SOURCE_DIR}/ProjectSpecific/")
     add_subdirectory (ProjectSpecific)
 endif(EXISTS "${CMAKE_SOURCE_DIR}/ProjectSpecific/")
+
+if(WITH_DOMAIN_MANAGER)
+	add_subdirectory (domain-manager)
+endif(WITH_DOMAIN_MANAGER)
 
 # uninstall target
 configure_file(
