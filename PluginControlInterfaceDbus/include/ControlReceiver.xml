@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE node PUBLIC
+  "-//freedesktop//DTD D-Bus Object Introspection 1.0//EN"
+  "http://standards.freedesktop.org/dbus/1.0/introspect.dtd">
+
+<node>
+	<interface name="org.genivi.audiomanager.ControlInterface">
+	<method name="connect">
+		<arg name="format" type="n" direction="in" />
+        <arg name="sourceID" type="q" direction="in" />
+        <arg name="sinkID" type="q" direction="in" />
+	</method>
+	<method name="disconnect">
+        <arg name="connectionID" type="q" direction="in" />
+        <arg name="sourceID" type="q" direction="in" />
+        <arg name="sinkID" type="q" direction="in" />
+	</method>
+	</interface>
+</node>

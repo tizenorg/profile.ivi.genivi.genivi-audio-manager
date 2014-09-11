@@ -250,6 +250,7 @@ endif(WITH_PLUGIN_ROUTING)
 
 if(WITH_PLUGIN_CONTROL)
 	add_subdirectory (PluginControlInterface)
+	add_subdirectory (PluginControlInterfaceDbus)
 endif(WITH_PLUGIN_CONTROL)
 
 add_subdirectory (AudioManagerDaemon)
