@@ -5,20 +5,21 @@ Summary:          GENIVI Audio Manager
 Version:          6.0
 Release:          0
 Source:           %{name}-%{version}.tar.bz2
+Source1001:       genivi-audio-manager.manifest
 BuildRequires:    cmake
-BuildRequires:	  pkgconfig(libsystemd-journal)
-BuildRequires:	  pkgconfig(python)
-BuildRequires:	  pkgconfig(sqlite3)
-BuildRequires:	  pkgconfig(dbus-1)
-BuildRequires:	  pkgconfig(automotive-dlt)
-BuildRequires:	  pkgconfig(zlib)
+BuildRequires:    pkgconfig(libsystemd-journal)
+BuildRequires:    pkgconfig(python)
+BuildRequires:    pkgconfig(sqlite3)
+BuildRequires:    pkgconfig(dbus-1)
+BuildRequires:    pkgconfig(automotive-dlt)
+BuildRequires:    pkgconfig(zlib)
 BuildRequires:    pkgconfig(CommonAPI)
 BuildRequires:    pkgconfig(CommonAPI-DBus)
-BuildRequires:	  pkgconfig(murphy-common)
+BuildRequires:    pkgconfig(murphy-common)
 BuildRequires:    pkgconfig(murphy-domain-controller)
 BuildRequires:    pkgconfig(murphy-dbus-libdbus)
-BuildRequires:	  bison
-BuildRequires:	  flex
+BuildRequires:    bison
+BuildRequires:    flex
 Requires(post):   /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -31,28 +32,41 @@ Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
-%{summary}. This package provides headers for developing AudioManager plugins and applications.
+"%{summary}.
+This package provides headers for developing AudioManager plugins 
+and applications."
 
 %prep
 %setup -q -n %{name}-%{version}
+cp %{SOURCE1001} .
 
 %build
 mkdir -p build
 cd build
 
-%cmake -DUSE_BUILD_LIBS=OFF -DWITH_TESTS=OFF -DWITH_ENABLED_IPC=DBUS -DWITH_DBUS_WRAPPER=ON -DWITH_NSM=OFF -DWITH_DLT=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+%cmake -DUSE_BUILD_LIBS=OFF \
+       -DWITH_TESTS=OFF \
+       -DWITH_ENABLED_IPC=DBUS \
+       -DWITH_DBUS_WRAPPER=ON \
+       -DWITH_NSM=OFF \
+       -DWITH_DLT=OFF \
+       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+       ..
 #make VERBOSE=1
 %__make %{?_smp_mflags}
 
 %install
-rm -rf "$RPM_BUILD_ROOT"
+rm -rf "%{buildroot}"
 cd build
-%make_install DESTDIR=$RPM_BUILD_ROOT
-mkdir $RPM_BUILD_ROOT%{_includedir}/%{name}
-mv $RPM_BUILD_ROOT%{_includedir}/*.h $RPM_BUILD_ROOT%{_includedir}/command $RPM_BUILD_ROOT%{_includedir}/control $RPM_BUILD_ROOT%{_includedir}/routing $RPM_BUILD_ROOT%{_includedir}/shared $RPM_BUILD_ROOT%{_includedir}/%{name}
-rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync.so*
+%make_install
+mkdir -p %{buildroot}%{_includedir}/%{name}
+for cpath in *.h command control routing shared; do
+    mv %{buildroot}%{_includedir}/${cpath} %{buildroot}%{_includedir}/%{name}
+done
+rm %{buildroot}%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync.so*
 
 %files
+%manifest %{name}.manifest
 %doc LICENCE README.html
 %{_bindir}/AudioManager
 %{_bindir}/domain-manager
@@ -64,4 +78,5 @@ rm $RPM_BUILD_ROOT%{_libdir}/audioManager/routing/libPluginRoutingInterfaceAsync
 %{_datadir}/audiomanager/*xml
 
 %files devel
+%manifest %{name}.manifest
 %{_includedir}/%{name}/*
