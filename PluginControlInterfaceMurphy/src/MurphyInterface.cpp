@@ -161,8 +161,8 @@ void MurphyInterface::DestroyDomainController()
 
 
 static int connect_request_cb(mrp_domctl_t *ctl,
-                              int narg, mrp_domctl_arg_t *args,
-                              int *nout, mrp_domctl_arg_t *outs,
+                              uint32_t narg, mrp_domctl_arg_t *args,
+                              uint32_t *nout, mrp_domctl_arg_t *outs,
                               void *user_data)
 {
   MurphyInterface           *self = static_cast<MurphyInterface *>(user_data);
@@ -375,7 +375,7 @@ void MurphyInterface::ExportSinksAndSources()
 
 
 static void request_route_reply_cb(mrp_domctl_t *dc, int error, int retval,
-                                   int narg, mrp_domctl_arg_t *args,
+                                   uint32_t narg, mrp_domctl_arg_t *args,
                                    void *user_data)
 {
   MurphyInterface      *self = mctl::MurphyInterface::getMurphyInterface();
